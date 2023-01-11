@@ -1,4 +1,4 @@
-package org.example.java8.anonymous.lambda;
+package org.example.java8.lambda;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,8 +7,8 @@ import lombok.ToString;
 
 import java.util.List;
 
-import static org.example.java8.anonymous.lambda.Color.*;
-import static org.example.java8.anonymous.lambda.FilteringApple.*;
+import static org.example.java8.lambda.Color.*;
+import static org.example.java8.lambda.FilteringApple.*;
 
 public class Main {
 
