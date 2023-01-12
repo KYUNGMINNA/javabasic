@@ -4,6 +4,8 @@ import org.example.java8.anonymous.Calculator;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 
 import static java.lang.System.out;
@@ -13,6 +15,10 @@ import static java.util.stream.Collectors.*;
 
 public class Main {
     public static void main(String[] args) {
+
+        out.println("2023-01-11");
+
+
         Trader raoul = new Trader("Raoul", "Cambridge");
         Trader mario = new Trader("Mario", "Milan");
         Trader alan = new Trader("Alan", "Cambridge");
@@ -74,5 +80,44 @@ public class Main {
                 .sorted() // 정렬 대상이 String이나 숫자 타입이면 Comparator를 안써도 정렬
                 .collect(toList());
         out.println("names = " + names);
+
+
+        out.println("---------------------------------------------------------------------------------------------------------------");
+        out.println("2023-01-12");
+
+
+        // 연습 5: Milan에 거주하는 거래자가 한명이라도 있는지 여부 확인?
+        boolean milanFlag = transactions.stream()
+                .anyMatch(d -> d.getTrader().getCity().equals("Milan"));
+        out.println("milanFlag = " + milanFlag);
+
+
+        out.println("=============================================");
+
+        // 연습 6: Cambridge에 사는 거래자의 모든 거래액의 총합 출력.
+        int cambridgeTotalValue = transactions.stream()
+                .filter(d -> d.getTrader().getCity().equals("Cambridge"))
+                .mapToInt(d -> d.getValue())
+                .sum();
+        out.println("cambridgeTotalValue = " + cambridgeTotalValue);
+
+
+        out.println("=============================================");
+
+        // 연습 7: 모든 거래에서 최고거래액은 얼마인가?
+         int maxValue = transactions.stream()
+                .mapToInt(d -> d.getValue())
+                .max()
+                 .getAsInt();
+        out.println("maxValue = " + maxValue);
+        out.println("=============================================");
+
+        //연습 8. 가장 작은 거래액을 가진 거래 정보 탐색
+        Optional<Transaction> smallestTransaction = transactions.stream()
+                //.min(Comparator.comparing(t->t.getValue()))
+                .min(comparing(Transaction::getValue));
+        
+        smallestTransaction.ifPresent(st-> out.println("st = " + st));
+
     }
 }
