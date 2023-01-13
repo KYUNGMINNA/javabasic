@@ -87,7 +87,5 @@ public class Mapping {
 
         //getAsDouble로   그냥 Double 타입으로 사용 가능
         System.out.println("meatAverageCalories2 = " + meatAverageCalories2);
-
-
     }
 }
