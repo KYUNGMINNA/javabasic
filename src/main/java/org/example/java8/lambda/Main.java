@@ -11,9 +11,9 @@ import static org.example.java8.lambda.Color.*;
 import static org.example.java8.lambda.FilteringApple.*;
 
 public class Main {
+    //람다 기초 2
 
     //무게가 100 그램 이하인 사과 필터 조건 클래스 : 내부 클래스
-
     public static class LightApplePredicate implements ApplePredicate{
 
         @Override
@@ -54,6 +54,7 @@ public class Main {
         );
 
 
+        //람다 기초 1
 
         List<Apple> greenAPples=
                 filterGreenApples(appleList);
@@ -63,6 +64,10 @@ public class Main {
             System.out.println(greenAPple);
         }
         System.out.println("------------------------------------");
+
+
+
+
         System.out.println("원하는 색 사과 필터링");
         List<Apple> wantedColorApples=filterApplesByColor(appleList,YELLOW);
         for (Apple wantedColorApple : wantedColorApples) {
@@ -70,6 +75,8 @@ public class Main {
         }
         System.out.println("------------------------------------");
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //람다 기초 2
 
         System.out.println("원하는 조건으로 필터링");
         //노랑 사과만 필터링
@@ -77,17 +84,18 @@ public class Main {
         for (Apple yellowApple : yellowApples) {
             System.out.println(yellowApple);
         }
+        //동작을 추상적으로 만들어서 ,이를 구현한 클래스를 만들어야 함 ->매번 새 클래스 파일을 만들어야함
         System.out.println(":::::::::::::::::::::::::::::::::::");
 
 
-        //무게가 100그램 이하인 사과만 필터링(내부 클래스)
+        //무게가 100그램 이하인 사과만 필터링(내부 클래스) -> 새 클래스 파일 생성의 번거로움을 줄이고자 내부 클래스로 제작
         List<Apple> lightApples=filterApples(appleList,new LightApplePredicate());
         for (Apple lightApple : lightApples) {
             System.out.println(lightApple);
         }
         System.out.println(":::::::::::::::::::::::::::::::::::");
 
-        //무게가 100그램 보다  큰 사과만 필터링(익명 클래스)
+        //무게가 100그램 보다  큰 사과만 필터링(익명 클래스) ->내부 클래스의 번잡함을 줄이고자 익명 클래스 제작
         List<Apple> heavypples=filterApples(appleList, new ApplePredicate() {
             @Override
             public boolean test(Apple apple) {
@@ -100,7 +108,7 @@ public class Main {
         }
         System.out.println(":::::::::::::::::::::::::::::::::::");
 
-        //녹색 사과만 필터링 - 람다 사용
+        //녹색 사과만 필터링 - 람다 사용  ->익명 클래스를 없애려고 람다를 사용
         //람다 사용 전제 조건 : 인터페이스의 추상메서드가 단 하나일 것 !
         //람다가 오버라이딩하는 메서드가 단 한줄일 경우 중괄호 생략 가능
         //그 한줄이 리턴문이라면 return 키워드 생략 가능
@@ -119,6 +127,13 @@ public class Main {
 
         //람다식 만들 때 new 인터페이스() { @Override  } 이런 상태로 만들어둔 후
         // 람다식에서 쓸 코드를 제외하고 지우는게 좋다
+
+        // 사과를 필터랑 할 때 동작을 추상화하여 색상, 무게 ,당도 이런 기준으로 바뀌어도 유연하게 대응이 가능
+        //그러나 사과가 아닌 가전제품 , 아니면 오렌지 와 같이 새로운 상품이면
+        // 새 인터페이스와 , 해당 상품을 필터링 하는 메서드를 또 제작해야 함
+        // --> 이를 해결 한게 제네릭 필터 메서드
+
+        //////////////////////////////////////////////////////////////////////////////////////
 
 
         System.out.println("제네릭 필터 메서드 ");
