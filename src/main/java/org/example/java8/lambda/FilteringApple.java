@@ -2,9 +2,13 @@ package org.example.java8.lambda;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class FilteringApple {
 
+
+    //람다 기초 1
     /**
      * @Solution - try1 : 녹색사과를 필터링하는 메서드를 만들어야 함 .
      * @Problem
@@ -27,7 +31,7 @@ public class FilteringApple {
     /**
      * @Solution - try 2 : 색상을 파라미터화 한다.
      * @Problem
-     * - 만약에 필터기준이 색상이 아니라 무게였다면?
+     * - 만약에 필터기준이 색상이 아니라 무게였다면? : 즉 ,사과의 필터 기준이 색상이 아닌 무게로 바뀐다면?
      * - 두번째 파라미터로 무게기준을 받아내는 메서드를 또 만들어야 한다.
      */
      public static List<Apple> filterApplesByColor(List<Apple> inventory,
@@ -51,6 +55,8 @@ public class FilteringApple {
         }
         return result;
     }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
     /**
@@ -85,7 +91,15 @@ public class FilteringApple {
         }
         return result;
     }
-
+    public static <T> List<T> filter2(List<T> inventory, Predicate<T> p) {
+        List<T> result = new ArrayList<>();
+        for (T t : inventory) {
+            if (p.test(t)) {
+                result.add(t);
+            }
+        }
+        return result;
+    }
 
     /**
      * 리스트와 변경 조건을 전달하면 리스트 내부의 값을 변경ㅈ건에 따라
@@ -108,6 +122,13 @@ public class FilteringApple {
         }
         return result;
     }
-
+    public static <T, R> List<R> map2(List<T> list, Function<T, R> mapper) {
+        List<R> result = new ArrayList<>();
+        for (T t : list) {
+            R r = mapper.apply(t);
+            result.add(r);
+        }
+        return result;
+    }
 
 }
